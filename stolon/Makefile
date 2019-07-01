@@ -36,7 +36,7 @@ CGO_ENABLED=	0
 
 do-build:
 	(cd ${GO_WRKSRC}; \
-	${GO_ENV}  ${GO_CMD} build ${GO_BUILDFLAGS} -o ${GO_WRKDIR_BIN}/stolon-sentinel ${GO_PKGNAME}/cmd/sentinel; \
+	${GO_ENV} ${GO_CMD} build ${GO_BUILDFLAGS} -o ${GO_WRKDIR_BIN}/stolon-sentinel ${GO_PKGNAME}/cmd/sentinel; \
 	${GO_ENV} ${GO_CMD} build ${GO_BUILDFLAGS} -o ${GO_WRKDIR_BIN}/stolon-proxy ${GO_PKGNAME}/cmd/proxy; \
 	${GO_ENV} ${GO_CMD} build ${GO_BUILDFLAGS} -o ${GO_WRKDIR_BIN}/stolonctl ${GO_PKGNAME}/cmd/stolonctl; \
 	${GO_ENV} CGO_ENABLED=1 ${GO_CMD} build ${GO_BUILDFLAGS} -o ${GO_WRKDIR_BIN}/stolon-keeper ${GO_PKGNAME}/cmd/keeper) 
