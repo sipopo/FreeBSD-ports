@@ -1,0 +1,42 @@
+#!/bin/sh
+
+#
+# PROVIDE: stolonproxy
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+#
+# Add the following line to /etc/rc.conf to enable stolon-keeper:
+#
+#  stolonproxy_enable="YES"
+#
+. /etc/rc.subr
+
+name=stolonproxy
+rcvar=stolonproxy_enable
+
+su_cmd="/usr/bin/su"
+
+start_cmd="stolonproxy_start"
+stolonproxy_user=${stolonproxy_user:-stolon}
+stolonproxy_log=${stolonproxy_log:-"/var/log/stolon-proxy.log"}
+
+
+load_rc_config $name
+
+: ${stolonproxy_enable:="NO"}
+
+
+command=%%PREFIX%%/bin/stolon-proxy
+
+# configuration of kepeer include from file
+. %%PREFIX%%/etc/stolon/stolon-proxy.conf
+
+
+stolonproxy_start()
+{
+	touch ${stolonproxy_log} && chown ${stolonproxy_user} ${stolonproxy_log}
+	${su_cmd} ${stolonproxy_user} -c "exec ${command}  >${stolonproxy_log} 2>&1" &
+}
+
+run_rc_command "$1"
+

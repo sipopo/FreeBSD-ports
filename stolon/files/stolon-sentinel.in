@@ -1,0 +1,42 @@
+#!/bin/sh
+
+#
+# PROVIDE: stolonsentinel
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+#
+# Add the following line to /etc/rc.conf to enable stolon-keeper:
+#
+#  stolonsentinel_enable="YES"
+#
+. /etc/rc.subr
+
+name=stolonsentinel
+rcvar=stolonsentinel_enable
+
+su_cmd="/usr/bin/su"
+
+start_cmd="stolonsentinel_start"
+stolonsentinel_user=${stolonsentinel_user:-stolon}
+stolonsentinel_log=${stolonsentinel_log:-"/var/log/stolon-sentinel.log"}
+
+
+load_rc_config $name
+
+: ${stolonsentinel_enable:="NO"}
+
+
+command=%%PREFIX%%/bin/stolon-sentinel
+
+# configuration of kepeer include from file
+. %%PREFIX%%/etc/stolon/stolon-sentinel.conf
+
+
+stolonsentinel_start()
+{
+	touch ${stolonsentinel_log} && chown ${stolonsentinel_user} ${stolonsentinel_log}
+	${su_cmd} ${stolonsentinel_user} -c "exec ${command}  >${stolonsentinel_log} 2>&1" &
+}
+
+run_rc_command "$1"
+
