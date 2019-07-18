@@ -28,4 +28,8 @@ do-install:
 	${MKDIR} ${STAGEDIR}${PREFIX}/${DNSUIDIR}
 	${CP} -R ${WRKSRC}/* ${STAGEDIR}${PREFIX}/${DNSUIDIR}
 
+post-install:
+	${FIND} -s ${STAGEDIR}${PREFIX}/${DNSUIDIR} -not -type d | ${SORT} |\
+		${SED} -e 's#^${STAGEDIR}${PREFIX}/##' >> ${TMPPLIST}
+
 .include <bsd.port.mk>
