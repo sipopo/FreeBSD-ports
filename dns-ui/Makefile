@@ -16,7 +16,7 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	operasoftware
 GH_PROJECT=	dns-ui
 
-USE_PHP=	intl json curl mbstring ldap pdo pdo_pgsql
+USE_PHP=	intl json curl mbstring ldap pdo pdo_pgsql hash
 NO_ARCH=	yes
 NO_BUILD=	yes
 
