@@ -19,11 +19,14 @@ GO_TARGET=	github.com/sorintlab/stolon-sentinel \
 		github.com/sorintlab/stolon-keeper \
 		github.com/sorintlab/stolonctl
 
-USE_RC_SUBR=	stolon-keeper stolon-proxy stolon-sentinel
+USE_RC_SUBR=	stolonkeeper stolonproxy stolonsentinel
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	sorintlab
 GH_PROJECT=	stolon
+
+UID_FILES=      ${FILESDIR}/UIDs
+GID_FILES=      ${FILESDIR}/GIDs
 
 USERS=		stolon
 GROUPS=		stolon
@@ -36,7 +39,7 @@ CGO_ENABLED=	0
 
 do-build:
 	(cd ${GO_WRKSRC}; \
-	${GO_ENV} ${GO_CMD} build ${GO_BUILDFLAGS} -o ${GO_WRKDIR_BIN}/stolon-sentinel ${GO_PKGNAME}/cmd/sentinel; \
+	${GO_ENV}  ${GO_CMD} build ${GO_BUILDFLAGS} -o ${GO_WRKDIR_BIN}/stolon-sentinel ${GO_PKGNAME}/cmd/sentinel; \
 	${GO_ENV} ${GO_CMD} build ${GO_BUILDFLAGS} -o ${GO_WRKDIR_BIN}/stolon-proxy ${GO_PKGNAME}/cmd/proxy; \
 	${GO_ENV} ${GO_CMD} build ${GO_BUILDFLAGS} -o ${GO_WRKDIR_BIN}/stolonctl ${GO_PKGNAME}/cmd/stolonctl; \
 	${GO_ENV} CGO_ENABLED=1 ${GO_CMD} build ${GO_BUILDFLAGS} -o ${GO_WRKDIR_BIN}/stolon-keeper ${GO_PKGNAME}/cmd/keeper) 

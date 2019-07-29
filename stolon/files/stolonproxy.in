@@ -2,7 +2,7 @@
 
 #
 # PROVIDE: stolonproxy
-# REQUIRE: LOGIN
+# REQUIRE: stolonsentinel stolonkeeper
 # KEYWORD: shutdown
 #
 # Add the following line to /etc/rc.conf to enable stolon-keeper:
