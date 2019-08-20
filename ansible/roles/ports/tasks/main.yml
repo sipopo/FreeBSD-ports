@@ -15,7 +15,7 @@
     command: |
       portsnap fetch --interactive
     environment:
-      http_proxy: "{{ http_basic_proxy }}"      
+      http_proxy: "{{ http_proxy }}"      
       no_proxy: "{{ no_proxy }}"
 
   - name: Extract fresh ports
@@ -25,7 +25,9 @@
   when: ports.stat.exists == false
 
 # check stolon ports
-- include: "ports.yml port={{ item }}"
+- include: "ports.yml port={{ outer_port }}"
   loop:
     - stolon
     - dns-ui
+  loop_control:
+    loop_var: outer_port

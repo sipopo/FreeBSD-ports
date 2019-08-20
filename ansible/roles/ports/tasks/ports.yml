@@ -15,8 +15,9 @@
     args:
       chdir: "{{ test_ports[port].dir }}/{{ test_ports[port].name }}"
     environment:
-      http_proxy: "{{ http_basic_proxy }}"            
-      https_proxy: "{{ http_basic_proxy }}"
+      BATCH: yes
+      http_proxy: "{{ http_proxy }}"            
+      https_proxy: "{{ http_proxy }}"
       no_proxy: "{{ no_proxy }}"
 
   - name: Build port {{ port }}
