@@ -22,15 +22,3 @@ To shutdown host
 
 ### Output
 Corrected packages should be placed  in ./data folder
-
-### Tree of tool 
-├── ansible
-│   └── roles
-│       └── ports
-│           ├── defaults
-│           ├── files
-│           │   ├── dns-ui
-│           │   └── stolon
-│           ├── tasks
-│           └── vars
-└── data
