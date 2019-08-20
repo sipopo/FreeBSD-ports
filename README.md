@@ -20,5 +20,9 @@ To run already exists in host
 To shutdown host
 >vagrant halt
 
+### Adding port for testing
+
+Don't forget add new port to variable test_ports
+
 ### Output
 Corrected packages should be placed  in ./data folder
