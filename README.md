@@ -1,17 +1,36 @@
 # FreeBSD-ports
-
 - stolon - [Stolon](https://github.com/sorintlab/stolon)
 - dns-ui - [Opera DNS UI](https://github.com/operasoftware/dns-ui)
 
-Add supporting vagrant to test port automaticaly 
+### Source ports
+./ansible/roles/ports/files
 
-To run this:
 
-install vagrant on your local host
+### Requirements 
+* vagrant 
+* virtualbox
 
-#vargant up - to run all from scratch
-#vargant reload --provision - to run already exists in host
+### Some commands
+To run all from scratch
+>vargant up
 
-Corrected packages shoud be in ./data folder
+To run already exists in host
+>vargant reload --provision
 
-All source ports in
+To shutdown host
+>vagrant halt
+
+### Output
+Corrected packages should be placed  in ./data folder
+
+### Tree of tool 
+├── ansible
+│   └── roles
+│       └── ports
+│           ├── defaults
+│           ├── files
+│           │   ├── dns-ui
+│           │   └── stolon
+│           ├── tasks
+│           └── vars
+└── data

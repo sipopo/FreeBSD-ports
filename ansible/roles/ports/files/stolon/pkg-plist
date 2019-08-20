@@ -1,0 +1,7 @@
+bin/stolon-sentinel
+bin/stolon-proxy
+bin/stolon-keeper
+bin/stolonctl
+etc/stolon/stolon-keeper.conf-dist
+etc/stolon/stolon-proxy.conf-dist
+etc/stolon/stolon-sentinel.conf-dist

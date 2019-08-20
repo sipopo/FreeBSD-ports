@@ -1,0 +1,8 @@
+---
+test_ports:
+  stolon:
+    dir: /usr/ports/databases
+    name: stolon
+  dns-ui:
+    dir: /usr/ports/dns
+    name: dns-ui

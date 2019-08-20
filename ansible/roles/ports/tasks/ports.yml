@@ -1,0 +1,51 @@
+---
+# Copy port to ports tree
+- debug:
+    msg: Working with {{ port }}
+
+- name: Copy {{ port }} port to ports tree
+  copy:
+    src: "{{ test_ports[port].name }}"
+    dest: "{{ test_ports[port].dir }}"
+
+# Make, build port, package
+- block:
+  - name: Run make for {{ port }}
+    command: make
+    args:
+      chdir: "{{ test_ports[port].dir }}/{{ test_ports[port].name }}"
+    environment:
+      http_proxy: "{{ http_basic_proxy }}"            
+      https_proxy: "{{ http_basic_proxy }}"
+      no_proxy: "{{ no_proxy }}"
+
+  - name: Build port {{ port }}
+    command: |
+      make build
+    args:
+      chdir: "{{ test_ports[port].dir }}/{{ test_ports[port].name }}"
+
+  - name: Build package for {{ port }}
+    command: |
+      make package
+    args:
+      chdir: "{{ test_ports[port].dir }}/{{ test_ports[port].name }}"
+
+# Copy package in local dir
+- block:
+  - name: Find package file for port {{ port }}
+    find:
+      path: "{{ test_ports[port].dir }}/{{ test_ports[port].name }}/work/pkg"
+
+    register: package
+
+#  - debug:
+#      msg: print {{ item.path }}
+#    with_items: 
+#      - "{{ package['files'] }}"
+    
+  - name: Copy {{ port }} package to mountfs
+    command:
+      cp -v {{ item.path }} /vagrant_data
+    with_items: 
+      - "{{ package['files'] }}"    

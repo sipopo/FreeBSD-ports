@@ -1,0 +1,8 @@
+---
+- hosts: default
+  become: true
+  vars_files:
+      - /home/osipov/Documents/Projects/etc/my_proxy
+  roles:
+    - ports
+

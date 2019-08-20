@@ -1,0 +1,31 @@
+---
+
+- name: Check exist ports tree
+  stat:
+    path: /usr/ports
+  register: ports
+
+- block:
+  - name: Create var/db/portsnap
+    file:
+      path: /var/db/portsnap
+      state: directory      
+
+  - name: Download fresh freebsd ports
+    command: |
+      portsnap fetch --interactive
+    environment:
+      http_proxy: "{{ http_basic_proxy }}"      
+      no_proxy: "{{ no_proxy }}"
+
+  - name: Extract fresh ports
+    command: |
+      portsnap extract
+
+  when: ports.stat.exists == false
+
+# check stolon ports
+- include: "ports.yml port={{ item }}"
+  loop:
+    - stolon
+    - dns-ui
