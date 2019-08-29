@@ -1,6 +1,7 @@
 #
 #
 PORTNAME=	dns-ui
+PORTREVISION=	2
 DISTVERSIONPREFIX=	v
 DISTVERSION=	0.2.3-47
 DISTVERSIONSUFFIX=	-g53f5118
@@ -19,6 +20,8 @@ GH_PROJECT=	dns-ui
 USE_PHP=	intl json curl mbstring ldap pdo pdo_pgsql hash
 NO_ARCH=	yes
 NO_BUILD=	yes
+
+EXTRA_PATCHES=	${FILESDIR}/001-lowercase_uid.patch:-p1
 
 DNSUIDIR?=	share/dns-ui
 
