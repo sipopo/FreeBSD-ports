@@ -9,7 +9,7 @@ index 29c6c60..d2de74e 100644
 +; This option controls whether or not the username is converted  
 +; to all lowercase letters. Can be useful if the username is stored
 +; in Active Directory (case-insensitive).
-+lowercase_php_auth = 0
++lowercase_user_auth = 0
  
  [ldap]
  enabled = 1
@@ -23,7 +23,7 @@ index d570e3b..d4898fd 100644
  		global $config;
 -		if($this->uid == $_SERVER['PHP_AUTH_USER'] and isset($_SERVER['PHP_AUTH_NAME']) and isset($_SERVER['PHP_AUTH_EMAIL']) and isset($_SERVER['PHP_AUTH_GROUPS'])) {
 +		
-+		if (!empty($config['php_auth']['lowercase_php_auth'])) {
++		if (!empty($config['php_auth']['lowercase_user_auth'])) {
 +			$php_auth_user = mb_strtolower($_SERVER['PHP_AUTH_USER']);
 +		} else {
 +			$php_auth_user = $_SERVER['PHP_AUTH_USER'];
@@ -43,7 +43,7 @@ index c2107a8..169689f 100644
  if(isset($_SERVER['PHP_AUTH_USER'])) {
 -	$active_user = $user_dir->get_user_by_uid($_SERVER['PHP_AUTH_USER']);
 +
-+	if (!empty($config['php_auth']['lowercase_auth_php'])) {
++	if (!empty($config['php_auth']['lowercase_user_auth'])) {
 +		$php_auth_user = mb_strtolower($_SERVER['PHP_AUTH_USER']);
 +	} else {
 +		$php_auth_user = $_SERVER['PHP_AUTH_USER'];
