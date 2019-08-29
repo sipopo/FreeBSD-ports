@@ -10,6 +10,13 @@
 
 # Make, build port, package
 - block:
+  - name: Make clean for {{ port }}
+    command: |
+      make clean
+    args:
+      chdir: "{{ test_ports[port].dir }}/{{ test_ports[port].name }}"
+
+
   - name: Run make for {{ port }}
     command: make
     args:
