@@ -12,7 +12,7 @@ COMMENT=	Stolon - PostgreSQL cloud native High Availability
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		go
+USES=		go:modules
 GO_PKGNAME=	github.com/sorintlab/stolon
 GO_TARGET=	github.com/sorintlab/stolon-sentinel \
 		github.com/sorintlab/stolon-proxy \
