@@ -3,8 +3,8 @@
 PORTNAME=	dns-ui
 PORTREVISION=	4
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.2.3-47
-DISTVERSIONSUFFIX=	-g53f5118
+DISTVERSION=	0.2.3-61
+DISTVERSIONSUFFIX=	-gc2e1e53
 CATEGORIES=	dns
 
 MAINTAINER=	sipopo@yandex.ru
@@ -21,7 +21,7 @@ USE_PHP=	intl json curl mbstring ldap pdo pdo_pgsql hash
 NO_ARCH=	yes
 NO_BUILD=	yes
 
-EXTRA_PATCHES=	${FILESDIR}/001-lowercase_uid.patch:-p1
+# EXTRA_PATCHES=	${FILESDIR}/001-lowercase_uid.patch:-p1
 
 DNSUIDIR?=	share/dns-ui
 
