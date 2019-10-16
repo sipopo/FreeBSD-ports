@@ -1,7 +1,7 @@
 #
 #
 PORTNAME=	dns-ui
-PORTREVISION=	4
+PORTREVISION=	1
 DISTVERSIONPREFIX=	v
 DISTVERSION=	0.2.3-61
 DISTVERSIONSUFFIX=	-gc2e1e53
@@ -21,7 +21,7 @@ USE_PHP=	intl json curl mbstring ldap pdo pdo_pgsql hash
 NO_ARCH=	yes
 NO_BUILD=	yes
 
-# EXTRA_PATCHES=	${FILESDIR}/001-lowercase_uid.patch:-p1
+EXTRA_PATCHES=	${FILESDIR}/001-force_tag_comment.patch:-p1
 
 DNSUIDIR?=	share/dns-ui
 
@@ -30,6 +30,8 @@ PLIST_SUB+=	DNSUIDIR=${DNSUIDIR}
 do-install:
 	${MKDIR} ${STAGEDIR}${PREFIX}/${DNSUIDIR}
 	${CP} -R ${WRKSRC}/* ${STAGEDIR}${PREFIX}/${DNSUIDIR}
+	${CP} ${FILESDIR}/get_tag_comment.php ${STAGEDIR}${PREFIX}/${DNSUIDIR}/extensions
+	${CP} ${FILESDIR}/site.css ${STAGEDIR}${PREFIX}/${DNSUIDIR}/public_html
 
 post-install:
 	${FIND} -s ${STAGEDIR}${PREFIX}/${DNSUIDIR} -not -type d | ${SORT} |\
