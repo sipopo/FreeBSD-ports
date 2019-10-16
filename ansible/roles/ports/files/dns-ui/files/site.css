@@ -1,0 +1,15 @@
+tr[data-account="Managed DNS"]>td.account {
+  background-color: #ffe7d3;
+}
+tr[data-account="Managed DNS"]:hover>td.account,
+tr[data-account="Managed DNS"]>td.account:hover {
+  background-color: #fbd7b9;
+}
+
+tr[data-account="DNS UI"]>td.account {
+  background-color: #ecfcd9;
+}
+tr[data-account="DNS UI"]:hover>td.account,
+tr[data-account="DNS UI"]>td.account:hover {
+  background-color: #dcf8b9;
+}
