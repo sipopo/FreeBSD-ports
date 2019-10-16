@@ -13,10 +13,10 @@ index 1f17290..d600cf1 100644
  [email]
  enabled = 1
 diff --git a/model/zone.php b/model/zone.php
-index 79bf818..31ff030 100644
+index 79bf818..7561625 100644
 --- a/model/zone.php
 +++ b/model/zone.php
-@@ -666,9 +666,15 @@ class Zone extends Record {
+@@ -666,9 +666,14 @@ class Zone extends Record {
  		if(is_null($update)) throw new InvalidJSON(json_last_error_msg());
  		if(!isset($update->actions) && !is_array($update->actions)) throw new BadData('No actions provided.');
  		if(isset($config['web']['force_change_comment']) && intval($config['web']['force_change_comment']) == 1 && empty($update->comment)) throw new BadData('A change comment must be provided.');
@@ -24,7 +24,6 @@ index 79bf818..31ff030 100644
  		foreach($update->actions as $action) {
  			try {
 -				$changes[] = $this->process_rrset_action($action, $trash, $revs_missing, $revs_updated);
-+				throw new BadData('No actions provided.');
 +				if(isset($config['web']['force_tag_comment']) && intval($config['web']['force_tag_comment']) == 1) {
 +					$changes[] = $this->process_rrset_action($action, $trash, $revs_missing, $revs_updated, $update->comment);
 +				} else {
@@ -33,7 +32,7 @@ index 79bf818..31ff030 100644
  			} catch(RuntimeException $e) {
  				$errors[] = $e->getMessage();
  			}
-@@ -720,7 +726,7 @@ class Zone extends Record {
+@@ -720,7 +725,7 @@ class Zone extends Record {
  	* @param array $revs_missing keep track of reverse zones that are missing
  	* @param array $revs_updated keep track of reverse zones that will be updated
  	*/
@@ -42,7 +41,7 @@ index 79bf818..31ff030 100644
  		global $active_user, $config, $zone_dir;
  		if(!is_object($update)) throw new BadData('Malformed update.');
  		if(!(isset($update->name) && isset($update->type))) throw new BadData('Malformed action.');
-@@ -766,7 +772,12 @@ class Zone extends Record {
+@@ -766,7 +771,12 @@ class Zone extends Record {
  			}
  			if(isset($update->comment)) {
  				$comment = new Comment;
@@ -56,7 +55,7 @@ index 79bf818..31ff030 100644
  				$comment->account = $active_user->uid;
  				$rrset->add_comment($comment);
  			}
-@@ -803,10 +814,16 @@ class Zone extends Record {
+@@ -803,10 +813,16 @@ class Zone extends Record {
  				}
  				$rrset->add_resource_record($rr);
  			}
