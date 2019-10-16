@@ -11,13 +11,15 @@
       path: /var/db/portsnap
       state: directory      
 
+  - name: Copy portsnap script
+    template: 
+      src: portsnap-local.j2
+      dest: /root/portsnap-local
+      mode: 0555
+
   - name: Download fresh freebsd ports
     command: |
-      portsnap fetch --interactive
-    environment:
-      http_proxy: "{{ http_proxy }}"
-      https_proxy: "{{ http_proxy }}"
-      no_proxy: "{{ no_proxy }}"
+      sh /root/portsnap-local
 
   - name: Extract fresh ports
     command: |
@@ -28,7 +30,7 @@
 # check stolon ports
 - include: "ports.yml port={{ outer_port }}"
   loop:
-    - stolon
+    # - stolon
     - dns-ui
   loop_control:
     loop_var: outer_port

@@ -23,11 +23,9 @@
       chdir: "{{ test_ports[port].dir }}/{{ test_ports[port].name }}"
     environment:
       BATCH: yes
-      HTTP_PROXY: "{{ http_proxy }}"            
-      http_proxy: "{{ http_proxy }}"            
-      HTTPS_PROXY: "{{ http_proxy }}"
-      https_proxy: "{{ http_proxy }}"
-      NO_PROXY: "{{ no_proxy }}"
+      HTTP_PROXY: '{{ http_proxy }}'
+      HTTPS_PROXY: '{{ http_proxy }}'
+    #  HTTP_PROXY_AUTH: '{{ http_proxy_auth }}'
 
   - name: Build port {{ port }}
     command: |
@@ -53,7 +51,7 @@
 #      msg: print {{ item.path }}
 #    with_items: 
 #      - "{{ package['files'] }}"
-    
+
   - name: Copy {{ port }} package to mountfs
     command:
       cp -v {{ item.path }} /vagrant_data

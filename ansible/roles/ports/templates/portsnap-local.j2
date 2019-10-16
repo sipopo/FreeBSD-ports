@@ -1,0 +1,7 @@
+#!/bin/sh
+export HTTP_PROXY='{{ http_proxy_2 }}'
+export HTTPS_PROXY='{{ http_proxy_2 }}'
+export HTTP_PROXY_AUTH='{{ http_proxy_auth }}'
+export NO_PROXY='localhost,repo.kaspersky-labs.com,repo1.kaspersky-labs.com,repo2.kaspersky-labs.com'
+
+portsnap fetch
