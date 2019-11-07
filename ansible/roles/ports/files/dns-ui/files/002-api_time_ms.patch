@@ -1,0 +1,22 @@
+diff --git a/views/api.php b/views/api.php
+index 28a34c9..71104da 100644
+--- a/views/api.php
++++ b/views/api.php
+@@ -162,7 +162,7 @@ class API {
+ 			$item = new StdClass;
+ 			$item->id = $changeset->id;
+ 			$item->author_uid = $changeset->author->uid;
+-			$item->change_date = $changeset->change_date->format('c');
++			$item->change_date = $changeset->change_date->format('Y-m-d\TH:i:s.u');
+ 			$item->comment = $changeset->comment;
+ 			$item->deleted = $changeset->deleted;
+ 			$item->added = $changeset->added;
+@@ -183,7 +183,7 @@ class API {
+ 		$data = new StdClass;
+ 		$data->id = $changeset->id;
+ 		$data->author_uid = $changeset->author->uid;
+-		$data->change_date = $changeset->change_date->format('c');
++		$data->change_date = $changeset->change_date->format('Y-m-d\TH:i:s.u');
+ 		$data->comment = $changeset->comment;
+ 		$data->deleted = $changeset->deleted;
+ 		$data->added = $changeset->added;

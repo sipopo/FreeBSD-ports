@@ -1,7 +1,7 @@
 #
 #
 PORTNAME=	dns-ui
-PORTREVISION=	3
+PORTREVISION=	4
 DISTVERSIONPREFIX=	v
 DISTVERSION=	0.2.3-61
 DISTVERSIONSUFFIX=	-gc2e1e53
@@ -21,7 +21,8 @@ USE_PHP=	intl json curl mbstring ldap pdo pdo_pgsql hash
 NO_ARCH=	yes
 NO_BUILD=	yes
 
-EXTRA_PATCHES=	${FILESDIR}/001-force_tag_comment.patch:-p1
+EXTRA_PATCHES=	${FILESDIR}/001-force_tag_comment.patch:-p1 \
+		${FILESDIR}/002-api_time_ms.patch:-p1
 
 DNSUIDIR?=	share/dns-ui
 
